@@ -1,0 +1,15 @@
+{
+  "name": "test-cdk",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+
+    "network:synth": "cdk synth --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\"",
+    "network:deploy": "cdk deploy --require-approval never --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\"",
+    "network:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\""
+
+  },
+  "devDependencies": {
+    "aws-cdk": "2.1143.0"
+  }
+}

@@ -1,0 +1,30 @@
+# =====================
+# Default behavior
+# =====================
+* text=auto
+
+# =====================
+# Shell scripts (Linux/macOS)
+# =====================
+*.sh text eol=lf
+mvnw text eol=lf
+
+# =====================
+# Windows scripts
+# =====================
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# =====================
+# GitHub / CI config
+# =====================
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# =====================
+# Java / config files
+# =====================
+*.java text eol=lf
+*.xml text eol=lf
+*.properties text eol=lf
+*.json text eol=lf
