@@ -1,4 +1,4 @@
-package com.swiftdo.app;
+package com.swiftdo.core;
 
 import java.util.Arrays;
 import java.util.Map;
