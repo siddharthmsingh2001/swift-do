@@ -52,7 +52,7 @@ public class NetworkApp {
 
         // Reolve Application Name
         String applicationName = (String) app.getNode().tryGetContext("applicationName");
-        Utility.requireNonEmpty(accountId, "context variable 'applicationName' must not be null");
+        Utility.requireNonEmpty(applicationName, "context variable 'applicationName' must not be null");
 
 
         // Collect optional network input parameters
