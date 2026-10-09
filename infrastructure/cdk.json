@@ -12,6 +12,12 @@
     ]
   },
   "context": {
+
+    "accountId": "654654630643",
+    "region": "ap-south-1",
+    "applicationName": "swift-do",
+    "environmentName": "dev",
+
     "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": true,
     "@aws-cdk/aws-ecs-patterns:secGroupsDisablesImplicitOpenListener": true,
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
