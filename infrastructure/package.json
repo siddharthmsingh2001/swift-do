@@ -4,6 +4,10 @@
   "private": true,
   "scripts": {
 
+    "repository:synth": "cdk synth --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.RepositoryApp\"",
+    "repository:deploy": "cdk deploy --require-approval never --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.RepositoryApp\"",
+    "repository:destroy": "cdk destroy --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.RepositoryApp\"",
+
     "network:synth": "cdk synth --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\"",
     "network:deploy": "cdk deploy --require-approval never --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\"",
     "network:destroy": "cdk destroy --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\""
