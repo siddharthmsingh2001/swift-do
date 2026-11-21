@@ -42,7 +42,7 @@ public class NetworkOutputParameters {
     private final String ecsClusterName;
 
     /** IDs of private subnets. */
-    private final List<String> privateSubnets;
+    private final List<String> isolatedSubnets;
 
     /** IDs of public subnets used for ingress. */
     private final List<String> publicSubnets;
@@ -73,7 +73,7 @@ public class NetworkOutputParameters {
             Optional<String> httpsListenerArn,
             String loadbalancerSecurityGroupId,
             String ecsClusterName,
-            List<String> privateSubnets,
+            List<String> isolatedSubnets,
             List<String> publicSubnets,
             List<String> availabilityZones,
             String loadBalancerArn,
@@ -85,7 +85,7 @@ public class NetworkOutputParameters {
         this.httpsListenerArn = httpsListenerArn;
         this.loadbalancerSecurityGroupId = loadbalancerSecurityGroupId;
         this.ecsClusterName = ecsClusterName;
-        this.privateSubnets = privateSubnets;
+        this.isolatedSubnets = isolatedSubnets;
         this.publicSubnets = publicSubnets;
         this.availabilityZones = availabilityZones;
         this.loadBalancerArn = loadBalancerArn;
@@ -119,8 +119,8 @@ public class NetworkOutputParameters {
     }
 
     /** @return isolated subnet IDs */
-    public List<String> getPrivateSubnets() {
-        return this.privateSubnets;
+    public List<String> getIsolatedSubnets() {
+        return this.isolatedSubnets;
     }
 
     /** @return public subnet IDs */

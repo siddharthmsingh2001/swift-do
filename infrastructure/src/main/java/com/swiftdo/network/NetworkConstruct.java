@@ -398,47 +398,33 @@ public class NetworkConstruct extends Construct {
                                 .build())
                 .build();
 
-        if (inputParameters.getSslCertificateArn().isPresent()) {
-            String sslCertificateArn = inputParameters.getSslCertificateArn().get();
+        String sslCertificateArn = inputParameters.getSslCertificateArn().get();
 
-            // HTTPS Listener gets the dummy target group
-            this.httpsListener = applicationLoadBalancer.addListener("HttpsListener", BaseApplicationListenerProps.builder()
-                    .port(443)
-                    .protocol(ApplicationProtocol.HTTPS)
-                    .certificates(List.of(ListenerCertificate.fromArn(sslCertificateArn)))
-                    .open(false) // Security group already handles ingress
-                    .build()
-            );
-            this.httpsListener.addTargetGroups("HttpsTargetGroup", AddApplicationTargetGroupsProps.builder()
-                    .targetGroups(List.of(dummyApplicationTargetGroup))
-                    .build()
-            );
+        // HTTPS Listener gets the dummy target group
+        this.httpsListener = applicationLoadBalancer.addListener("HttpsListener", BaseApplicationListenerProps.builder()
+                .port(443)
+                .protocol(ApplicationProtocol.HTTPS)
+                .certificates(List.of(ListenerCertificate.fromArn(sslCertificateArn)))
+                .open(false) // Security group already handles ingress
+                .build()
+        );
+        this.httpsListener.addTargetGroups("HttpsTargetGroup", AddApplicationTargetGroupsProps.builder()
+                .targetGroups(List.of(dummyApplicationTargetGroup))
+                .build()
+        );
 
-            // HTTP Listener simply redirects all traffic to HTTPS by default
-            this.httpListener = applicationLoadBalancer.addListener("HttpListener", BaseApplicationListenerProps.builder()
-                    .port(80)
-                    .protocol(ApplicationProtocol.HTTP)
-                    .defaultAction(ListenerAction.redirect(RedirectOptions.builder()
-                            .protocol("HTTPS")
-                            .port("443")
-                            .permanent(true)
-                            .build()))
-                    .open(false)
-                    .build()
-            );
-        } else {
-            // Non-TLS Environment: HTTP points to dummy target group
-            this.httpListener = applicationLoadBalancer.addListener("HttpListener", BaseApplicationListenerProps.builder()
-                    .port(80)
-                    .protocol(ApplicationProtocol.HTTP)
-                    .open(false)
-                    .build()
-            );
-            this.httpListener.addTargetGroups("HttpTargetGroup", AddApplicationTargetGroupsProps.builder()
-                    .targetGroups(List.of(dummyApplicationTargetGroup))
-                    .build()
-            );
-        }
+        // HTTP Listener simply redirects all traffic to HTTPS by default
+        this.httpListener = applicationLoadBalancer.addListener("HttpListener", BaseApplicationListenerProps.builder()
+                .port(80)
+                .protocol(ApplicationProtocol.HTTP)
+                .defaultAction(ListenerAction.redirect(RedirectOptions.builder()
+                        .protocol("HTTPS")
+                        .port("443")
+                        .permanent(true)
+                        .build()))
+                .open(false)
+                .build()
+        );
 
         return applicationLoadBalancer;
     }
@@ -501,7 +487,7 @@ public class NetworkConstruct extends Construct {
         putParameter("LoadBalancerCanonicalHostedZoneIdParameter", NetworkOutputs.PARAMETER_LOAD_BALANCER_HOSTED_ZONE_ID, this.loadBalancer.getLoadBalancerCanonicalHostedZoneId());
         putListParameter("AvailabilityZoneParameter", NetworkOutputs.PARAMETER_AVAILABILITY_ZONES, this.vpc.getAvailabilityZones());
         putListParameter("PublicSubnetIdsParameter", NetworkOutputs.PARAMETER_PUBLIC_SUBNETS, this.vpc.getPublicSubnets().stream().map(ISubnet::getSubnetId).toList());
-        putListParameter("PrivateSubnetIdsParameter", NetworkOutputs.PARAMETER_PRIVATE_SUBNETS, this.vpc.getIsolatedSubnets().stream().map(ISubnet::getSubnetId).toList());
+        putListParameter("IsolatedSubnetIdsParameter", NetworkOutputs.PARAMETER_ISOLATED_SUBNETS, this.vpc.getIsolatedSubnets().stream().map(ISubnet::getSubnetId).toList());
     }
 
     /**
