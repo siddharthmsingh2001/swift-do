@@ -3,12 +3,8 @@ package com.swiftdo.app;
 import com.swiftdo.core.ApplicationEnvironment;
 import com.swiftdo.core.DeploymentStage;
 import com.swiftdo.network.NetworkConstruct;
-import software.amazon.awscdk.App;
-
+import software.amazon.awscdk.*;
 import com.swiftdo.core.Utility;
-import software.amazon.awscdk.Environment;
-import software.amazon.awscdk.Stack;
-import software.amazon.awscdk.StackProps;
 
 /**
  * CDK application entry point responsible for deploying
@@ -58,11 +54,10 @@ public class NetworkApp {
         // Collect optional network input parameters
         NetworkConstruct.NetworkInputParameters inputParameters = new NetworkConstruct.NetworkInputParameters();
 
-        // Optional SSL certificate for HTTPS support
-        String sslCertificateArn = (String) app.getNode().tryGetContext("sslCertificateArnBackend");
-        if (sslCertificateArn != null && !sslCertificateArn.isBlank()) {
-            inputParameters.withSslCertificateArn(sslCertificateArn);
-        }
+        // SSL Certificate for HTTPs support
+        String sslCertificateArn = Fn.importValue("swift-do-SslCertificateArn");
+        Utility.requireNonEmpty(sslCertificateArn, "swift-do-SslCertificateArn must not be null");
+        inputParameters.withSslCertificateArn(sslCertificateArn);
 
         // Explicitly define the AWS deployment environment
         Environment awsEnvironment = Utility.makeEnv(accountId, region);
