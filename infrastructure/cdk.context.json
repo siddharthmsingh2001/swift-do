@@ -3,5 +3,9 @@
     "ap-south-1a",
     "ap-south-1b",
     "ap-south-1c"
-  ]
+  ],
+  "hosted-zone:account=654654630643:domainName=swift-do.com:region=ap-south-1": {
+    "Id": "/hostedzone/Z10470721CR9KEMQJ1GSU",
+    "Name": "swift-do.com."
+  }
 }
