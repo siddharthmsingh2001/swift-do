@@ -17,6 +17,12 @@
     "region": "ap-south-1",
     "applicationName": "swift-do",
     "environmentName": "dev",
+    "springProfile": "dev",
+    "repositoryName": "swift-do",
+    "imageTag": "latest",
+    "hostedZoneDomain": "swift-do.com",
+    "appDomain": ["swift-do.com", "app.swift-do.com"],
+    "apiDomain": "api.swift-do.com",
 
     "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": true,
     "@aws-cdk/aws-ecs-patterns:secGroupsDisablesImplicitOpenListener": true,
