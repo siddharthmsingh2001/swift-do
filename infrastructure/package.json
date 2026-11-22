@@ -10,8 +10,19 @@
 
     "network:synth": "cdk synth --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\"",
     "network:deploy": "cdk deploy --require-approval never --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\"",
-    "network:destroy": "cdk destroy --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\""
+    "network:destroy": "cdk destroy --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.NetworkApp\"",
 
+    "api-service:synth": "cdk synth --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.ServiceApp\"",
+    "api-service:deploy": "cdk deploy --require-approval never --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.ServiceApp\"",
+    "api-service:destroy": "cdk destroy --app \"./mvnw -e compile exec:java -Dexec.mainClass=com.swiftdo.app.ServiceApp\"",
+
+    "api-certificate:synth": "cdk synth --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.BackendCertificateApp\"",
+    "api-certificate:deploy": "cdk deploy --require-approval never --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.BackendCertificateApp\"",
+    "api-certificate:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.BackendCertificateApp\"",
+
+    "api-domain:synth": "cdk synth --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.BackendDomainApp\"",
+    "api-domain:deploy": "cdk deploy --require-approval never --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.BackendDomainApp\"",
+    "api-domain:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.swiftdo.app.BackendDomainApp\""
   },
   "devDependencies": {
     "aws-cdk": "2.1143.0"
